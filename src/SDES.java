@@ -144,13 +144,21 @@ public class SDES {
 	
 	
 	/**
+	 * @author Abby Beizer
 	 * Left half of x, L(x)
 	 * @param input
 	 * @return A bit array which is the left half of the parameter, input
 	 */
 	public boolean[] lh(boolean[] input)
 	{
-		return new boolean[1];
+		int leftHalfSize = (input.length)/2;
+		boolean[] leftHalf = new boolean[leftHalfSize];
+		for(int i = 0; i < leftHalfSize; i++)
+		{
+			leftHalf[i] = input[i];
+		}
+		
+		return leftHalf;
 	}
 	
 	
