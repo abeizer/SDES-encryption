@@ -151,7 +151,7 @@ public class SDES {
 	 */
 	public boolean[] lh(boolean[] input)
 	{
-		int leftHalfSize = (input.length)/2;
+		int leftHalfSize = input.length/2;
 		boolean[] leftHalf = new boolean[leftHalfSize];
 		for(int i = 0; i < leftHalfSize; i++)
 		{
@@ -163,13 +163,21 @@ public class SDES {
 	
 	
 	/**
+	 * @author Abby Beizer
 	 * Right half of x, R(x)
 	 * @param input
 	 * @return A bit array which is the right half of the parameter, input
 	 */
 	public boolean[] rh(boolean[] input)
 	{
-		return new boolean[1];
+		int len = input.length;
+		boolean[] rightHalf = new boolean[len/2];
+		for(int i = 0, j = len/2; j < len; i++, j++)
+		{
+			rightHalf[i] = input[j];
+		}
+		
+		return rightHalf;
 	}
 	
 	
