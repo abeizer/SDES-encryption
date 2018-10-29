@@ -13,6 +13,11 @@ public class Driver {
 		
 		// Right Half
 		System.out.println(Arrays.toString(x.rh(new boolean[] {true, true, true, false, true, false})));
+		
+		// Concatenation
+		System.out.println( Arrays.toString( x.concat(new boolean[] {true, true, false, false}, new boolean[] {true, false, true, false}) ));
+		System.out.println( Arrays.toString( x.concat(new boolean[] {false}, new boolean[] {true, true, false}) ));
+		System.out.println( Arrays.toString( x.concat(new boolean[] {}, new boolean[] {true}) ));
 	}
 
 }

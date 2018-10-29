@@ -49,7 +49,24 @@ public class SDES {
 	 */
 	public boolean[] concat(boolean[] x, boolean[] y)
 	{
-		return new boolean[1];
+		int xLen = x.length, yLen = y.length;
+		boolean[] concatenation = new boolean[xLen + yLen];
+		
+		int index = 0;
+		
+		// First loop for x
+		for(int i = 0; i < xLen; i++, index++)
+		{
+			concatenation[i] = x[i];
+		}
+		
+		// Second loop for y, starting at index
+		for(int j = 0; j < yLen; j++, index++)
+		{
+			concatenation[index] = y[j];
+		}
+		
+		return concatenation;
 	}
 	
 	
