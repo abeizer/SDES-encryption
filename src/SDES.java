@@ -30,7 +30,7 @@ public class SDES {
 	
 	
 	/**
-	 * Convert the given byte array to a String
+	 * Convert the given byte to a bit array, of the given size
 	 * @param b
 	 * @param size - The size of the resulting bit array. The operator >>> can be used for an unsigned right shift.
 	 * @return
