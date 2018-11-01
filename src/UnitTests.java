@@ -71,5 +71,18 @@ class UnitTests {
 		assertNull( x.expPerm(new boolean[] {true, true, false, false}, new int[] {-1}) );
 		
 	}
+	
+	@Test
+	void sbox0Test() {
+		// 0000 should return 01
+		assertArrayEquals( SBox0.getValue(new boolean[] {false, false, false, false}), new boolean[] {false, true} );
+		
+		// 1010 should return 10
+		assertArrayEquals( SBox0.getValue(new boolean[] {true, false, true, false}), new boolean[] {true, false} );
+		
+		// Incorrect input size should return null
+		assertNull( SBox0.getValue(new boolean[] {false, false}) );
+		assertNull( SBox0.getValue(new boolean[] {false, false, false, false, false}) );
+	}
 
 }
