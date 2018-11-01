@@ -115,6 +115,7 @@ public class SDES {
 	
 	
 	/**
+	 * @author Abby Beizer
 	 * Expand and/or permute and/or select from the bit array, inp, producing an expanded/permuted/selected bit array
 	 * @param input - A bit array represented as booleans (true = 1, false = 0)
 	 * @param epv - An expansion and/or permutation and/or selection vector. All numbers in epv must be a valid input index.
@@ -122,7 +123,26 @@ public class SDES {
 	 */
 	public boolean[] expPerm(boolean[] input, int[] epv)
 	{
-		return new boolean[1];
+		// The result will be the same length as the epv array
+		int len = epv.length;
+		boolean[] result = new boolean[len];
+		
+		for(int i = 0; i < len; i++)
+		{
+			try
+			{
+				// Use the int at epv[i] to index into the input array
+				result[i] = input[epv[i]];
+			}
+			catch(IndexOutOfBoundsException e)
+			{
+				// This exception will be thrown if any int in epv exceeds
+				// the range of input's indeces. In this case, return null.
+				return null;
+			}
+		}
+		
+		return result;
 	}
 	
 	

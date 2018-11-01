@@ -51,5 +51,25 @@ class UnitTests {
 		assertArrayEquals(  x.concat(new boolean[] {}, new boolean[] {}), new boolean[] {} );
 		
 	}
+	
+	@Test
+	void expPermTest() {
+		SDES x = new SDES();
+		
+		// Short selection permutation
+		assertArrayEquals( x.expPerm(new boolean[] {true, true, false, false}, new int[] {0, 2, 1, 3}),		new boolean[] {true, false, true, false} );
+		assertArrayEquals( x.expPerm(new boolean[] {true, true, false, false}, new int[] {1, 2, 3}),		new boolean[] {true, false, false} );
+		
+		// A permutation with redundant epv indeces
+		assertArrayEquals( x.expPerm(new boolean[] {true, true, false, false}, new int[] {0, 0, 0, 0}),		new boolean[] {true, true, true, true} );
+		
+		// An expansion
+		assertArrayEquals( x.expPerm(new boolean[] {true, true, false, false}, new int[] {1, 2, 3, 1, 0, 2}),		new boolean[] {true, false, false, true, true, false} );
+		
+		// The permutation array has an int that is out of input's index range. Should return null
+		assertNull( x.expPerm(new boolean[] {true, true, false, false}, new int[] {0, 1, 2, 3, 4}) );
+		assertNull( x.expPerm(new boolean[] {true, true, false, false}, new int[] {-1}) );
+		
+	}
 
 }
