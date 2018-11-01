@@ -42,6 +42,7 @@ public class SDES {
 	
 	
 	/**
+	 * @author Abby Beizer
 	 * Concatenate the two bit arrays, x || y
 	 * @param x
 	 * @param y

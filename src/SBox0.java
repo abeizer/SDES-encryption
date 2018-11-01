@@ -1,4 +1,8 @@
 
+/**
+ * @author Abby Beizer
+ * The SBox accepts a 4-digit binary number as input and returns a two-digit binary number.
+ */
 public class SBox0 {
 	
 	public static boolean[] getValue(boolean[] input)
