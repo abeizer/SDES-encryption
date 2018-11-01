@@ -49,7 +49,6 @@ class UnitTests {
 		
 		// Both arrays are empty
 		assertArrayEquals(  x.concat(new boolean[] {}, new boolean[] {}), new boolean[] {} );
-		
 	}
 	
 	@Test
@@ -69,7 +68,26 @@ class UnitTests {
 		// The permutation array has an int that is out of input's index range. Should return null
 		assertNull( x.expPerm(new boolean[] {true, true, false, false}, new int[] {0, 1, 2, 3, 4}) );
 		assertNull( x.expPerm(new boolean[] {true, true, false, false}, new int[] {-1}) );
+	}
+	
+	@Test
+	void xorTest() {
+		SDES x = new SDES();
 		
+		// 0 xor 0 = 0
+		assertArrayEquals( x.xor(new boolean[] {false}, new boolean[] {false}), new boolean[] {false});
+		
+		// 1 xor 1 = 0
+		assertArrayEquals( x.xor(new boolean[] {true}, new boolean[] {true}), new boolean[] {false});
+		
+		// 0 xor 1 = 1
+		assertArrayEquals( x.xor(new boolean[] {false}, new boolean[] {true}), new boolean[] {true});
+		
+		// 1 xor 0 = 1
+		assertArrayEquals( x.xor(new boolean[] {true}, new boolean[] {false}), new boolean[] {true});
+		
+		// xor works on arrays
+		assertArrayEquals( x.xor(new boolean[] {false, false, true, true}, new boolean[] {false, true, false, true}), new boolean[] {false, true, true, false});
 	}
 	
 	@Test

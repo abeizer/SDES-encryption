@@ -238,6 +238,7 @@ public class SDES {
 	}
 	
 	/**
+	 * @author Abby Beizer
 	 * Exclusive OR 
 	 * x and y must have the same length
 	 * x XOR y is the same as x != y
@@ -247,7 +248,28 @@ public class SDES {
 	 */
 	public boolean[] xor(boolean[] x, boolean[] y)
 	{
-		return new boolean[1];
+		int len = x.length;
+		
+		if(len != y.length)
+		{
+			// The two boolean arrays must have the same length
+			return null;
+		}
+		
+		boolean[] result = new boolean[len];
+		for(int i = 0; i < len; i++)
+		{
+			if(x[i] == y[i])		// 0
+			{
+				result[i] = false;
+			}
+			else					// 1
+			{
+				result[i] = true;
+			}
+		}
+		
+		return result;
 	}
 	
 }
