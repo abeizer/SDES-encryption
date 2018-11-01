@@ -84,5 +84,17 @@ class UnitTests {
 		assertNull( SBox0.getValue(new boolean[] {false, false}) );
 		assertNull( SBox0.getValue(new boolean[] {false, false, false, false, false}) );
 	}
+	
+	void sbox1Test() {
+		// 1111 should return 11
+		assertArrayEquals( SBox1.getValue(new boolean[] {false, false, false, false}), new boolean[] {true, true} );
+		
+		// 0101 should return 01
+		assertArrayEquals( SBox1.getValue(new boolean[] {true, false, true, false}), new boolean[] {false, true} );
+		
+		// Incorrect input size should return null
+		assertNull( SBox1.getValue(new boolean[] {true, true}) );
+		assertNull( SBox1.getValue(new boolean[] {true, true, true, true, true}) );
+	}
 
 }
