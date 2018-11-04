@@ -124,15 +124,20 @@ public class SDES {
     }
     
     
-    /**
-     * Decrypt the given byte array
-     * @param cipher - An array of bytes representing the cipher text
-     * @return An array of bytes representing the original plain text
-     */
-    public byte[] decrypt(byte[] cipher)
-    {
-        return new byte[1];
-    }
+	/**
+	 * @author Geoffrey Cohen
+	 * Decrypt the given byte array
+	 * @param cipher - An array of bytes representing the cipher text
+	 * @return An array of bytes representing the original plain text
+	 */
+	public byte[] decrypt(byte[] cipher)
+	{
+		byte[] x = new byte[cipher.length]; // instantiate plain text (same length as cipher text)
+		for (int i=0; i<cipher.length; i++) { // for each byte in cipher text, decrypt
+			x[i] = decryptByte(cipher[i]);
+		}
+		return x;
+	}
     
     
     /**
@@ -146,15 +151,21 @@ public class SDES {
     }
     
     
-    /**
-     * Encrypt the given string using SDES Each character produces a byte of cipher
-     * @param msg
-     * @return An array of bytes representing the cipher text
-     */
-    public byte[] encrypt(String msg)
-    {
-        return new byte[1];
-    }
+	/**
+	 * @author Geoffrey Cohen
+	 * Encrypt the given string using SDES Each character produces a byte of cipher
+	 * @param msg
+	 * @return An array of bytes representing the cipher text
+	 */
+	public byte[] encrypt(String msg)
+	{
+        byte[] x = msg.getBytes(); // get plain text as bytes
+        byte[] y = new byte[x.length]; // instantiate cipher text
+        for (int i=0; i<x.length; i++) { // for each byte in plain text, encrypt and assign to same byte in plain text
+        	y[i] = encryptByte(x[i]);
+        }
+        return y;     
+	}
     
     
     /**
