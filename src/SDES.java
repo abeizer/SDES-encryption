@@ -78,18 +78,35 @@ public class SDES {
      */
     public boolean[] byteToBitArray(byte b, int size)
     {
-        boolean[] result = new boolean[size];
+        // Check if the given size can accommodate the requested byte
+        int check = 1;
+        for (int i = 0; i < size-1; i++) {
+            check = check * 2;
+        }
+        if (b > 0) {
+            if (b > check-1) {
+                System.out.println("byteToBitArray: Size is too small to accommodate the byte, proceeding anyway");
+                //System.exit(0);
+            }
+        }
+        else if (b < 0) {
+            if (b < check*-1) {
+                System.out.println("byteToBitArray: Size is too small to accommodate the byte, proceeding anyway");
+                //System.exit(0);
+            }
+        }
         
-        for (int i = 0; i < 8; i++) {
-            result[i] = (b & (1 << i)) == 0 ? false : true;
+        // Takes byte, converts to binary array of boolean values
+        boolean[] temp = new boolean[size];
+        for (int i = 0; i < size; i++) {
+            temp[i] = (b & (1 << i)) == 0 ? false : true;
         }
 
-        for (int i = 0; i<result.length/2; i++) {
-            boolean temp = result[i];
-            result[i] = result[result.length-1-i];
-            result[result.length-1-i] = temp;
+        // reverses the array so that's in the correct order
+        boolean[] result = new boolean[size];
+        for (int i = 0; i < temp.length; i++) {
+            result[result.length-1-i] = temp[i];
         }
-        
         return result;
     }
     
