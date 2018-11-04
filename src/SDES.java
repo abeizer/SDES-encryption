@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
 public class SDES {
+    boolean[] key = new boolean[10];
     public SDES()
     {
         
@@ -258,7 +259,18 @@ public class SDES {
     {
         // His definition includes passing a scanner, but why pass a scanner?
         java.util.Scanner in = new java.util.Scanner(System.in);
-        
+        System.out.println("Please enter your 10 bit key:");
+        for (int i = 0; i < 10; i++) {
+            System.out.println("next bit: ");
+            int bit = in.nextInt();
+            if (bit == 1) {
+                key[i] = true;
+            }
+            else if (bit != 0) {
+                System.out.println("getKey10: Only ones and zero's allowed");
+                System.exit(0);
+            }
+        }
     }
     
     
