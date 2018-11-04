@@ -70,6 +70,7 @@ public class SDES {
     
     
     /**
+     * @author Dominic Nolt
      * Convert the given byte to a bit array, of the given size
      * @param b
      * @param size - The size of the resulting bit array. The operator >>> can be used for an unsigned right shift.
@@ -77,7 +78,19 @@ public class SDES {
      */
     public boolean[] byteToBitArray(byte b, int size)
     {
-        return new boolean[1];
+        boolean[] result = new boolean[size];
+        
+        for (int i = 0; i < 8; i++) {
+            result[i] = (b & (1 << i)) == 0 ? false : true;
+        }
+
+        for (int i = 0; i<result.length/2; i++) {
+            boolean temp = result[i];
+            result[i] = result[result.length-1-i];
+            result[result.length-1-i] = temp;
+        }
+        
+        return result;
     }
     
     
