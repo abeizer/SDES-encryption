@@ -290,21 +290,46 @@ public class SDES {
     
     
     /**
+     * @author Dominic Nolt
      * Send the bitArray to stdout as 1's and 0's
      * @param input
      */
+    
+    // Copied code from bitArrayToByte, can make a seperate method later
     public void show(boolean[] input)
     {
+        String stringByte = "";
+        int[] temp = new int[input.length];
+        if (input.length > 8) {
+            System.out.println("bitArrayToByte: parameter longer than 8 bits");
+            System.exit(0);
+        }
+        else {
+            int j = input.length-1;
+            for (int i = input.length-1; i >= 0; i--) {
+               if (input[i] == true) { 
+                    temp[j] = 1;
+               }
+               j--;
+            }
+        }
         
+        for (int i = 0; i <= temp.length-1; i++) {
+            stringByte = stringByte + temp[i];
+        }
+        
+        System.out.println(stringByte);
     }
     
     /**
+     * @author Dominic Nolt
      * Send the byteArray to stdout
      * @param byteArray
      */
     public void show(byte[] byteArray)
     {
-        
+        String s = byteArrayToString(byteArray);
+        System.out.println(s);
     }
     
     /**
