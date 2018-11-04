@@ -1,7 +1,6 @@
 import java.util.Scanner;
 
 public class SDES {
-
     public SDES()
     {
         
@@ -52,13 +51,21 @@ public class SDES {
     
     
     /**
+     * @Author Dominic Nolt
      * Convert the given byte array to a String
      * @param input - An array of bytes, storing the codes of printable characters
      * @return The characters as a String
      */
     public String byteArrayToString(byte[] input)
     {
-        return "";
+        String s = "";
+        if (input.length > 0) {
+            s = s + input[0];
+            for (int i = 1; i <= input.length-1; i++) {
+                s = s + " " + input[i];
+            }
+        }
+        return new String(s);
     }
     
     
