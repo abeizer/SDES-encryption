@@ -263,26 +263,32 @@ public class SDES {
     
     
     /**
+     * @author Geoffrey Cohen
      * This is the 'round' function
-     * @param x
-     * @param k
-     * @return
+     * @param x bitArray to be passed through function
+     * @param k key to be used in feistel function
+     * @return bitArray to be used in successive functions
      */
     public boolean[] f(boolean[] x, boolean[] k)
     {
-        return new boolean[1];
+        return concat(xor(lh(x), feistel(k, rh(x))), rh(x)); //self explanatory
     }
     
     
     /**
+     * @author Geoffrey Cohen
      * F(k,x) is a Feistel function F(k,x) = P4 (s0 (L (k xor EP(x))) || s1 (R (k xor EP(x)))
-     * @param k
-     * @param x
-     * @return
+     * @param k key to be used
+     * @param x 4-bit array, right half of initial x
+     * @return 4-bit array to be used in round
      */
     public boolean[] feistel(boolean[] k, boolean[] x)
     {
-        return new boolean[1];
+    	int[] expPer = {3, 0, 1, 2, 1, 2, 3, 0};
+    	int[] p4Per = {1, 3, 2, 0};
+    	boolean[] kXorEpX = xor(k, expPerm(x, expPer)); // going to use this twice, so instantiate
+    	
+    	return expPerm(concat(SBox0.getValue(lh(kXorEpX)), SBox1.getValue(rh(kXorEpX))), p4Per); //self explanatory    	
     }
     
     /**
