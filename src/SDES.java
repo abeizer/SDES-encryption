@@ -159,13 +159,30 @@ public class SDES {
     
     
     /**
+	 * @author Geoffrey Cohen
      * Decrypt a single byte using SDES
-     * @param b
-     * @return
+     * @param b the byte to be decrypted
+     * @return a decrypted byte
      */
     public byte decryptByte(byte b)
     {
-        return 0;
+        boolean[] bitArr = byteToBitArray(b, 8); // load byte into array of bits
+
+		int[] iniPer = {1, 5, 2, 0, 3, 7, 4, 6};
+		int[] iniPerInv = {3, 0, 2, 4, 6, 1, 7, 5};
+		int[] k1Per = {0, 6, 8, 3, 7, 2, 9, 5};
+		int[] k2Per = {7, 2, 5, 4, 9, 1, 8, 0};
+
+		bitArr = expPerm(bitArr, iniPer); // IP
+		boolean[] k2 = expPerm(key, k2Per); // fsubk2 -- key should be a field
+		bitArr = f(bitArr, k2);
+		bitArr = concat(rh(bitArr), lh(bitArr)); // swap
+		boolean[] k1 = expPerm(key, k1Per); // fsubk1
+		bitArr = f(bitArr, k1);
+		bitArr = expPerm(bitArr, iniPerInv); // IP^-1
+
+		return bitArrayToByte(bitArr);		
+		
     }
     
     
@@ -187,13 +204,29 @@ public class SDES {
     
     
     /**
-     * Encrypt a single byte using SDES
-     * @param b
-     * @return
+	 * @author Geoffrey Cohen
+     * encrypt a single byte using SDES
+     * @param b the byte to be encrypted
+     * @return an encrypted byte
      */
     public byte encryptByte(byte b)
     {
-        return 0;
+        boolean[] bitArr = byteToBitArray(b, 8); // load byte into array of bits
+
+		int[] iniPer = {1, 5, 2, 0, 3, 7, 4, 6};
+		int[] iniPerInv = {3, 0, 2, 4, 6, 1, 7, 5};
+		int[] k1Per = {0, 6, 8, 3, 7, 2, 9, 5};
+		int[] k2Per = {7, 2, 5, 4, 9, 1, 8, 0};
+
+		bitArr = expPerm(bitArr, iniPer); // IP
+		boolean[] k1 = expPerm(key, k1Per); // fsubk1 -- key should be a field
+		bitArr = f(bitArr, k1);
+		bitArr = concat(rh(bitArr), lh(bitArr)); // swap
+		boolean[] k2 = expPerm(key, k2Per); // fsubk2
+		bitArr = f(bitArr, k2);
+		bitArr = expPerm(bitArr, iniPerInv); // IP^-1
+
+		return bitArrayToByte(bitArr);	
     }
     
     
