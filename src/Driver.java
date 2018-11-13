@@ -38,7 +38,7 @@ public class Driver {
 		System.out.println("\n");
 		
 		// Encrypt result of decryption to compare to original prompt
-		x.show( x.encrypt("100 -17 24 115 93 24 21 11 93 115 -17 11 93 -127 55 21 64 115 93 29 24 -74 11 64 93 116 -127 93 -43 116 46 21 93 115 11 24 -74 93 -74 11 -74 31 11 21 64 -8"));
+		x.show( x.encrypt("What are the first names of your team members?"));
 	}
 
 }
