@@ -1,3 +1,4 @@
+import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -195,7 +196,16 @@ public class SDES {
 	 */
 	public byte[] encrypt(String msg)
 	{
-		byte[] x = msg.getBytes(); // get plain text as bytes
+		byte[] x = {};
+		try 
+		{
+			x = msg.getBytes("US-ASCII"); // get plain text as bytes
+		}
+		catch(UnsupportedEncodingException e)
+		{
+			e.printStackTrace();
+		}
+
 		byte[] y = new byte[x.length]; // instantiate cipher text
 		for (int i=0; i<x.length; i++) { // for each byte in plain text, encrypt and assign to same byte in plain text
 			y[i] = encryptByte(x[i]);
@@ -303,7 +313,7 @@ public class SDES {
         // Prompt for input
         System.out.println("Please enter your 10 bit key:");
         String bits = in.nextLine();
-        bits.replace(" ", "");	// Remove any spaces in input
+        bits = bits.replace(" ", "");	// Remove any spaces in input
         
         // The input has to be 10 chars long
         if(bits.length() != 10)
