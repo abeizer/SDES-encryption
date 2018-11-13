@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class SDES {
@@ -292,25 +293,51 @@ public class SDES {
     }
     
     /**
+     * @author Abby Beizer
      * Get a 10 bit key from the keyboard, such as 1010101010
      */
     public void getKey10()
     {
         java.util.Scanner in = new java.util.Scanner(System.in);
+        
+        // Prompt for input
         System.out.println("Please enter your 10 bit key:");
-        for (int i = 0; i < 10; i++) {
-            System.out.println("next bit: ");
-            int bit = in.nextInt();
-            if (bit == 1) {
-                key[i] = true;
+        String bits = in.nextLine();
+        bits.replace(" ", "");	// Remove any spaces in input
+        
+        // The input has to be 10 chars long
+        if(bits.length() != 10)
+        {
+        	System.out.println("Key must be 10 bits");
+        	System.exit(0);
+        }
+        
+        // Convert the 1's and 0's to booleans
+        for (int i = 0; i < 10; i++) 
+        {
+        	// 1 = true
+            if ( Character.getNumericValue(bits.charAt(i)) == 1) 
+            {
+                this.key[i] = true;
             }
-            else if (bit != 0) {
+            // 0 = false
+            else if( Character.getNumericValue(bits.charAt(i)) == 0) 
+            {
+            	this.key[i] = false;
+            }
+            // If not 0 or 1, incorrect input
+            else
+            {
                 System.out.println("getKey10: Only ones and zero's allowed");
                 System.exit(0);
             }
         }
     }
     
+    public boolean[] showKey()
+    {
+    	return(this.key);
+    }
     
     /**
      * @author Abby Beizer

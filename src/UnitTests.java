@@ -1,11 +1,16 @@
 import static org.junit.jupiter.api.Assertions.*;
-
+import java.io.ByteArrayInputStream;
 import java.util.Arrays;
-
+import org.junit.Rule;
+import org.junit.rules.ExpectedException;
 import org.junit.jupiter.api.Test;
+
 
 class UnitTests {
 
+	@Rule
+	public final ExpectedException exit = ExpectedException.none();
+	
 	@Test
 	void lhTest() {
 		SDES x = new SDES();
@@ -103,16 +108,28 @@ class UnitTests {
 		assertNull( SBox0.getValue(new boolean[] {false, false, false, false, false}) );
 	}
 	
+	@Test
 	void sbox1Test() {
 		// 1111 should return 11
-		assertArrayEquals( SBox1.getValue(new boolean[] {false, false, false, false}), new boolean[] {true, true} );
+		assertArrayEquals( SBox1.getValue(new boolean[] {true, true, true, true}), new boolean[] {true, true} );
 		
 		// 0101 should return 01
-		assertArrayEquals( SBox1.getValue(new boolean[] {true, false, true, false}), new boolean[] {false, true} );
+		assertArrayEquals( SBox1.getValue(new boolean[] {false, true, false, true}), new boolean[] {false, true} );
 		
 		// Incorrect input size should return null
 		assertNull( SBox1.getValue(new boolean[] {true, true}) );
 		assertNull( SBox1.getValue(new boolean[] {true, true, true, true, true}) );
+	}
+	
+	@Test
+	void testGetKey10() {
+		SDES x = new SDES();
+		
+		// Set input stream
+		System.setIn(new ByteArrayInputStream("1010101010".getBytes()));
+		
+		x.getKey10();
+		assertArrayEquals(new boolean[] {true, false, true, false, true, false, true, false, true, false}, x.showKey());
 	}
 
 }
