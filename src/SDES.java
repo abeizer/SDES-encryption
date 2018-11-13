@@ -194,12 +194,12 @@ public class SDES {
 	 */
 	public byte[] encrypt(String msg)
 	{
-        byte[] x = msg.getBytes(); // get plain text as bytes
-        byte[] y = new byte[x.length]; // instantiate cipher text
-        for (int i=0; i<x.length; i++) { // for each byte in plain text, encrypt and assign to same byte in plain text
-        	y[i] = encryptByte(x[i]);
+		byte[] x = msg.getBytes(); // get plain text as bytes
+		byte[] y = new byte[x.length]; // instantiate cipher text
+		for (int i=0; i<x.length; i++) { // for each byte in plain text, encrypt and assign to same byte in plain text
+			y[i] = encryptByte(x[i]);
         }
-        return y;     
+		return y;     
 	}
     
     
@@ -296,7 +296,6 @@ public class SDES {
      */
     public void getKey10()
     {
-        // His definition includes passing a scanner, but why pass a scanner?
         java.util.Scanner in = new java.util.Scanner(System.in);
         System.out.println("Please enter your 10 bit key:");
         for (int i = 0; i < 10; i++) {
@@ -356,8 +355,6 @@ public class SDES {
      * Send the bitArray to stdout as 1's and 0's
      * @param input
      */
-    
-    // Copied code from bitArrayToByte, can make a seperate method later
     public void show(boolean[] input)
     {
         String stringByte = "";
