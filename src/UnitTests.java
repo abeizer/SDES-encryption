@@ -1,3 +1,4 @@
+
 import static org.junit.jupiter.api.Assertions.*;
 import java.io.ByteArrayInputStream;
 import java.util.Arrays;
@@ -10,6 +11,38 @@ class UnitTests {
 
 	@Rule
 	public final ExpectedException exit = ExpectedException.none();
+	
+	@Test
+	void bitArrayToByteTest() {
+		SDES x = new SDES();
+		
+		assertEquals(x.bitArrayToByte(new boolean[]{false, true, true, true, true, true, true, true}), 127); 
+		assertEquals(x.bitArrayToByte(new boolean[]{true, false, false, false, false, false, false, false}), -128);
+		assertEquals(x.bitArrayToByte(new boolean[]{false}), 0);
+		
+		assertEquals(x.bitArrayToByte(new boolean[]{true, true, false, true, false, false}), -12);
+		assertEquals(x.bitArrayToByte(new boolean[]{false, true, true, true, false, true, false}), 58);
+	}
+	
+	@Test
+	void byteArrayToStringTest() {
+		SDES x = new SDES();
+		
+		assertTrue(x.byteArrayToString(new byte[]{127, -18, -128, 24, 78, 0, -36}).equals("127 -18 -128 24 78 0 -36"));
+	}
+	
+	@Test
+	void byteToBitArrayTest() {
+		SDES x = new SDES();
+		
+		assertArrayEquals(x.byteToBitArray((byte) 127, 8), new boolean[]{false, true, true, true, true, true, true, true});
+		assertArrayEquals(x.byteToBitArray((byte) -128, 8), new boolean[]{true, false, false, false, false, false, false, false});
+		
+		assertArrayEquals(x.byteToBitArray((byte) 0, 8), new boolean[]{false, false, false, false, false, false, false, false});
+		assertArrayEquals(x.byteToBitArray((byte) 31, 6), new boolean[]{false, true, true, true, true, true});
+		assertArrayEquals(x.byteToBitArray((byte) -16, 5), new boolean[]{true, false, false, false, false});
+	}
+	
 	
 	@Test
 	void lhTest() {

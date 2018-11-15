@@ -68,7 +68,7 @@ public class SDES {
                 s = s + " " + input[i];
             }
         }
-        return new String(s);
+        return s;
     }
     
     
